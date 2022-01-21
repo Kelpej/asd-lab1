@@ -7,4 +7,22 @@ public class Professor extends Person{
         super(name, age, faculty);
         this.department = department;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "name= " + getName() +
+                ", age= " + getAge() +
+                ", faculty= " + getFaculty() +
+                ", department=" + department +
+                '}';
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }

@@ -9,7 +9,15 @@ public class PersonName {
         if (name.split(" ").length == 3)
             this.name = name;
         else
-            throw new InvalidNameException(name);
+            throw new InvalidNameException("The name of a person must consist of three parts.\n" +
+                    name + " is not valid.");
+    }
+
+    @Override
+    public String toString() {
+        return "Name{" +
+                "name='" + name + '\'' +
+                '}';
     }
 
     public void setName(String name) {
@@ -18,12 +26,5 @@ public class PersonName {
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String toString() {
-        return "Name{" +
-                "name='" + name + '\'' +
-                '}';
     }
 }
