@@ -8,7 +8,6 @@ public class FacultyName {
     public FacultyName(String name) throws InvalidFacultyNameException {
         if (name.split(" ")[0].equals("Факультет")) { //fix read
             this.name = name;
-            System.out.println(this.name);
             fixString();
         } else {
             throw new InvalidFacultyNameException("The name of a faculty must begin with \"Факультет\".\n" +
@@ -18,7 +17,6 @@ public class FacultyName {
 
     private void fixString() {
         char[] data = name.toCharArray();
-        System.out.println(data);
         for (int i = 9; i < data.length - 1; i++) {
             if (data[i] == ' ')
                 data[i + 1] = Character.toLowerCase(data[i + 1]);

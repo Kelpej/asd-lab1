@@ -12,31 +12,82 @@ import java.util.Arrays;
 public class University {
     private static Faculty[] faculties;
     private static Department[] departments;
-    private static Professor[] professors;
     private static Student[] students;
+    private static Professor[] professors;
 
     private static final File fauclt = new File("input/faculties");
     private static final File depart = new File("input/departments");
     private static final File stud = new File("input/students");
+    private static final File prof = new File("input/professors");
 
+    private static final String mainMenuText = "1. Створити/видалити/редагувати факультет." +
+            "\n2. Створити/видалити/редагувати кафедру факультета." +
+            "\n3. Додати/видалити/редагувати студента/викладача до кафедри." +
+            "\n4. Знайти студента/викладача за ПІБ, курсом або групою." +
+            "\n5. Вивести всіх студентів впорядкованих за курсами." +
+            "\n6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом." +
+            "\n7. Вивести всіх студентів кафедри впорядкованих за курсами." + //??????????????
+            "\n8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом." +
+            "\n9. Вивести всіх студентів кафедри вказаного курсу." + //must be changed to faculty
+            "\n10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.\n"; //must be changed to faculty
+    private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.";
+    private static final String studentOrProfessor = "1. Student.\n2. Professor.";
+    
     public static void main(String[] args) {
         try {
             readFaculties();
-            System.out.println(Arrays.toString(faculties));
+            readDepartments();
             readStudents();
-            //readFaculties();
-            Professor vykladach = new Professor(new PersonName("Митник Юрій Васильович"), 69, new Faculty(new FacultyName("Факультет інформатики")),
-                    new Department(new DepartmentName("Кафедра математики")));
-            System.out.println(vykladach);
-            Person chel2 = new Person(new PersonName("Григоренко Сергій"), 4, new Faculty(new FacultyName("Факультет інформатики")));
-            System.out.println(chel2);
-            Person chel = new Person(new PersonName("Григоренко Сергій Сергійович"), 24, new Faculty(new FacultyName("Факультет інформатики")));
-            System.out.println(chel);
+            readProfessors();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(Arrays.toString(professors));
     }
+    private static void mainMenu() {
+        System.out.println(mainMenuText);
+        int option = DataInput.checkInt(DataInput.getInt("Choose an option: "), 1, 10);
 
+        switch(option) {
+            case 1:
+                System.out.println("What exactly do you want to do with a faculty?");
+                System.out.println(changeMenu);
+                break;
+            case 2:
+                System.out.println("What exactly do you want to do with a department?");
+                System.out.println(changeMenu);
+                break;
+            case 3:
+                System.out.println("Choose a class you want to change.");
+                System.out.println(studentOrProfessor);
+                break;
+            case 4:
+                System.out.println("Choose a class where to find.");
+                System.out.println(studentOrProfessor);
+                break;
+            case 5:
+                System.out.println("Here are the students by year of studying ascending: ");
+                break;
+            case 6:
+                System.out.println("Choose a class to print out by alphabet: ");
+                System.out.println(studentOrProfessor);
+                break;
+            case 7:
+                //хз що тут писати, завдання єбаніна якась
+                break;
+            case 8:
+                System.out.println("Choose a department: ");
+                break;
+            case 9:
+                System.out.println("Enter a name of a faculty: ");
+                System.out.println("Enter a year of studying: ");
+                break;
+            case 10:
+                System.out.println("Enter a name of a faculty: ");
+                System.out.println("Here they are by alphabet ascending: ");
+                break;
+        }
+    }
     private static void readFaculties() throws FileNotFoundException, InvalidFacultyDataFormat, InvalidFacultyNameException {
         String[] input = DataInput.readFile(fauclt);
         int length = input.length;
@@ -44,12 +95,10 @@ public class University {
         faculties = new Faculty[length];
 
         for (int i = 0; i < length; i++) {
-            String[] facultyData = input[i].split(" ");
-
-            if (facultyData.length < 2)
+            if (input[i].split(" ").length < 2)
                 throw new InvalidFacultyDataFormat("\"" + input[i] + "\"" + " is not proper faculty data.");
 
-            Faculty faculty = new Faculty(new FacultyName(facultyData[0]));
+            Faculty faculty = new Faculty(new FacultyName(input[i]));
 
             faculties[i] = faculty;
         }
@@ -62,12 +111,10 @@ public class University {
         departments = new Department[length];
 
         for (int i = 0; i < length; i++) {
-            String[] departmentData = input[i].split(" ");
-
-            if (departmentData.length < 2)
+            if (input[i].split(" ").length < 2)
                 throw new InvalidFacultyDataFormat("\"" + input[i] + "\"" + " is not proper department data.");
 
-            Department faculty = new Department(new DepartmentName(departmentData[0]));
+            Department faculty = new Department(new DepartmentName(input[i]));
 
             departments[i] = faculty;
         }
@@ -92,7 +139,27 @@ public class University {
 
             students[i] = student;
         }
+    }
 
+    private static void readProfessors() throws FileNotFoundException, InvalidNameException, FacultyDoesNotExist, InvalidProfessorDataFormat, DepartmentDoesNotExist {
+        String[] input = DataInput.readFile(prof);
+        int length = input.length;
+
+        professors = new Professor[length];
+
+        for (int i = 0; i < length; i++) {
+            String[] professorData = input[i].split(" ");
+
+            if (professorData.length != 6)
+                throw new InvalidProfessorDataFormat("\"" + input[i] + "\"" + " is not proper professor data.");
+
+            StringBuffer name = new StringBuffer();
+            name.append(professorData[0]).append(" ").append(professorData[1]).append(" ").append(professorData[2]);
+            Professor professor = new Professor(new PersonName(name.toString()), Integer.parseInt(professorData[3]),
+                    findFaculty(professorData[4]), findDepartment(professorData[5]));
+
+            professors[i] = professor;
+        }
     }
 
     private static Faculty findFaculty(String facultyName) throws FacultyDoesNotExist {
@@ -104,8 +171,27 @@ public class University {
 
     private static Department findDepartment(String departmentName) throws DepartmentDoesNotExist {
         for (Department department : departments)
-            if (departmentName.equals(department.getName()))
+            if (departmentName.equals(department.getName()) || departmentName.equals(department.getAcronym()))
                 return department;
         throw new DepartmentDoesNotExist("\"" + departmentName + "\" does not exist.");
+    }
+
+    private static Student findStudent(String studentName) throws StudentDoesNotExist{
+        for (Student student : students)
+            if (studentName.equals(student.getName()))
+                return student;
+        throw new StudentDoesNotExist("\"" + studentName + "\" does not exist.");
+    }
+
+    private static void createFaculty() {
+        try {
+            String name = DataInput.getString("Enter the name of the new faculty: ");
+            Faculty newFaculty = new Faculty(new FacultyName(name));
+            Faculty[] newFaculties = Arrays.copyOf(faculties, faculties.length + 1);
+            newFaculties[newFaculties.length - 1] = newFaculty;
+            faculties = newFaculties;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }

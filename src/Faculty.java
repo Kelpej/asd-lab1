@@ -5,6 +5,7 @@ public class Faculty {
     private String acronym;
 
     public Faculty(FacultyName name) {
+        System.out.println(name.getName());
         this.name = name.getName();
 
         StringBuffer acronymBuf = new StringBuffer();

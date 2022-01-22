@@ -13,7 +13,7 @@ public final class DataInput {
 			System.out.print(wr);
 	}
 
-	static int checkInt(int input, int low, int high) {
+	public static int checkInt(int input, int low, int high) {
 		while (input <= low || input > high) {
 			input = getInt("Try again: ");
 		}
@@ -68,7 +68,7 @@ public final class DataInput {
 		return value;
 	}
 	
-	public static String getString(String text) throws IOException{
+	public static String getString(String text) throws IOException {
 		writeText(text);
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
