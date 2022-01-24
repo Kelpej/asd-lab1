@@ -24,8 +24,8 @@ public class Person {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(PersonName name) {
+        this.name = name.getName();
     }
 
     public int getAge() {

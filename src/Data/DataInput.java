@@ -48,9 +48,8 @@ public final class DataInput {
 		return value;
 	}
 	
-	public static char getChar(String text) throws IOException{
-		String s = getString(text);
-		return s.charAt(0);
+	public static char getChar(String text) throws IOException {
+		return getString(text).charAt(0);
 	}
 	
 	public static Integer getInt(String text){
