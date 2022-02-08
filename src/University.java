@@ -28,18 +28,18 @@ public class University {
     private static final File prof = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\professors");
 
 
-    private static final String mainMenuText = "\nAAA";/*"""
-            1. Створити/видалити/редагувати факультет.
-            2. Створити/видалити/редагувати кафедру факультета.
-            3. Додати/видалити/редагувати студента/викладача до кафедри.
-            4. Знайти студента/викладача за ПІБ, курсом або групою.
-            5. Вивести всіх студентів впорядкованих за курсами.
-            6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом.
-            7. Вивести всіх студентів кафедри впорядкованих за курсами.
-            8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
-            9. Вивести всіх студентів кафедри вказаного курсу.
-            10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
-            """;*/
+    private static final String mainMenuText = 
+            "\n1. Створити/видалити/редагувати факультет.\n"+
+            "2. Створити/видалити/редагувати кафедру факультета.\n"+
+            "3. Додати/видалити/редагувати студента/викладача до кафедри.\n"+
+            "4. Знайти студента/викладача за ПІБ, курсом або групою.\n"+
+            "5. Вивести всіх студентів впорядкованих за курсами.\n"+
+            "6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом.\n"+
+            "7. Вивести всіх студентів кафедри впорядкованих за курсами.\n"+
+            "8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.\n"+
+            "9. Вивести всіх студентів кафедри вказаного курсу.\n"+
+            "10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.\n"
+            ;
     private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.\n4. Exit";
     private static final String studentOrProfessor = "1. Student.\n2. Professor.\n3. Exit";
 
@@ -233,7 +233,6 @@ public class University {
                 }
                 break;
             case 5:
-                System.out.println("Here are the students by year of studying ascending: ");
                 for(int i = 1; i < 5; i++)
                 {
                     System.out.println("\nStudents of " + i + " year of studying:");
@@ -257,6 +256,7 @@ public class University {
                 }
 
                 System.out.println("\nStudents of " + fac.getName() + ":");
+                Sort.stringSortLH(students);
                 for (Student student : students) 
                 {
                     if(student.getFaculty().equals(fac))
@@ -264,6 +264,7 @@ public class University {
                          System.out.println(student);
                     }
                 }
+                Sort.stringSortLH(professors);
                 System.out.println("\nProfessors of " + fac.getName()+ ":");
                 for (Professor professor : professors) 
                 {
@@ -275,18 +276,41 @@ public class University {
 
                 break;
             case 7:
-                //хз що тут писати, завдання єбаніна якась
+                //Вивести всіх студентів кафедри впорядкованих за курсами.
+                ///студент <---> кафедра ???
                 break;
             case 8:
-                System.out.println("Choose a department: ");
+            //Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
+            //студент <---> кафедра ???
+                printOutArray(departments);
+                Department dep = null;
+                while(dep == null)
+                {
+                    try {
+                        dep = findDepartment(DataInput.getString("\nEnter the name/acronym of a department you want to access: "));
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                Sort.stringSortLH(professors);
+                System.out.println("\nProfessors of " + dep.getName()+ ":");
+                for (Professor professor : professors) 
+                {
+                    if(professor.getDepartment().equals(dep))
+                    {
+                         System.out.println(professor);
+                    }
+                }
                 break;
             case 9:
-                System.out.println("Enter a name of a faculty: ");
-                System.out.println("Enter a year of studying: ");
+            //Вивести всіх студентів кафедри вказаного курсу.
+            //студент <---> кафедра ???
+                //System.out.println("Enter a name of a faculty: ");
+                //System.out.println("Enter a year of studying: ");
                 break;
             case 10:
-                System.out.println("Enter a name of a faculty: ");
-                System.out.println("Here they are by alphabet ascending: ");
+            //Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
+            //студент <---> кафедра ???
+                //System.out.println("Enter a name of a faculty: ");
+                //System.out.println("Here they are by alphabet ascending: ");
                 break;
         }
         mainMenu();
