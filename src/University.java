@@ -15,17 +15,15 @@ public class University {
     private static Student[] students;
     private static Professor[] professors;
 
-    /*
-    private static final File facult = new File("input/faculties");
-    private static final File depart = new File("input/departments");
-    private static final File stud = new File("input/students");
-    private static final File prof = new File("input/professors");
-    */
+    final static String path = "";
+    
+    private static final File facult = new File(path + "input/faculties");
+    private static final File depart = new File(path + "input/departments");
+    private static final File stud = new File(path + "input/students");
+    private static final File prof = new File(path + "input/professors");
+    
 
-    private static final File facult = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\faculties");
-    private static final File depart = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\departments");
-    private static final File stud = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\students");
-    private static final File prof = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\professors");
+    
 
 
     private static final String mainMenuText = 
