@@ -481,14 +481,6 @@ public class University {
         }
     }
 
-    private static void printOutArray(String[] array) {
-        for (String element : array)
-            System.out.println(element);
-    }
-    private static void printOutArray(int[] array) {
-        for (int element : array)
-            System.out.println(element);
-    }
     private static void printOutArray(Faculty[] array) {
         for (Faculty element : array)
             System.out.println(element);
