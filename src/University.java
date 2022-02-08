@@ -15,12 +15,20 @@ public class University {
     private static Student[] students;
     private static Professor[] professors;
 
+    /*
     private static final File facult = new File("input/faculties");
     private static final File depart = new File("input/departments");
     private static final File stud = new File("input/students");
     private static final File prof = new File("input/professors");
+    */
 
-    private static final String mainMenuText = """
+    private static final File facult = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\faculties");
+    private static final File depart = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\departments");
+    private static final File stud = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\students");
+    private static final File prof = new File("C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\input\\professors");
+
+
+    private static final String mainMenuText = "\nAAA";/*"""
             1. Створити/видалити/редагувати факультет.
             2. Створити/видалити/редагувати кафедру факультета.
             3. Додати/видалити/редагувати студента/викладача до кафедри.
@@ -31,7 +39,7 @@ public class University {
             8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
             9. Вивести всіх студентів кафедри вказаного курсу.
             10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
-            """;
+            """;*/
     private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.\n4. Exit";
     private static final String studentOrProfessor = "1. Student.\n2. Professor.\n3. Exit";
 
@@ -44,7 +52,7 @@ public class University {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        printOutArray(departments);
+        //printOutArray(departments);
         mainMenu();
     }
 
@@ -226,10 +234,45 @@ public class University {
                 break;
             case 5:
                 System.out.println("Here are the students by year of studying ascending: ");
+                for(int i = 1; i < 5; i++)
+                {
+                    System.out.println("\nStudents of " + i + " year of studying:");
+                    for (Student student : students) 
+                    {
+                        if(student.getYofs() == i)
+                        {
+                            System.out.println(student);
+                        }
+                    }
+                }
                 break;
             case 6:
-                System.out.println("Choose a class to print out by alphabet: ");
-                System.out.println(studentOrProfessor);
+                printOutArray(faculties);
+                Faculty fac = null;
+                while(fac == null)
+                {
+                    try {
+                        fac = findFaculty(DataInput.getString("Enter the name/acronym of a faculty you want to access: "));
+                    } catch (Exception e) {System.err.println(e);}
+                }
+
+                System.out.println("\nStudents of " + fac.getName() + ":");
+                for (Student student : students) 
+                {
+                    if(student.getFaculty().equals(fac))
+                    {
+                         System.out.println(student);
+                    }
+                }
+                System.out.println("\nProfessors of " + fac.getName()+ ":");
+                for (Professor professor : professors) 
+                {
+                    if(professor.getFaculty().equals(fac))
+                    {
+                         System.out.println(professor);
+                    }
+                }
+
                 break;
             case 7:
                 //хз що тут писати, завдання єбаніна якась
@@ -246,6 +289,7 @@ public class University {
                 System.out.println("Here they are by alphabet ascending: ");
                 break;
         }
+        mainMenu();
     }
 
     private static void readFaculties() throws FileNotFoundException, InvalidFacultyDataFormat, InvalidFacultyNameException {
@@ -437,8 +481,29 @@ public class University {
         }
     }
 
-    private static <T> void printOutArray(T[] array) {
-        for (T element : array)
+    private static void printOutArray(String[] array) {
+        for (String element : array)
             System.out.println(element);
     }
+    private static void printOutArray(int[] array) {
+        for (int element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Faculty[] array) {
+        for (Faculty element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Department[] array) {
+        for (Department element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Professor[] array) {
+        for (Professor element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Student[] array) {
+        for (Student element : array)
+            System.out.println(element);
+    }
+    
 }
