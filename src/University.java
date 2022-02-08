@@ -15,17 +15,13 @@ public class University {
     private static Student[] students;
     private static Professor[] professors;
 
-    final static String path = "";
+    final static String path = "";//"C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\";
     
     private static final File facult = new File(path + "input/faculties");
     private static final File depart = new File(path + "input/departments");
     private static final File stud = new File(path + "input/students");
     private static final File prof = new File(path + "input/professors");
     
-
-    
-
-
     private static final String mainMenuText = 
             "\n1. Створити/видалити/редагувати факультет.\n"+
             "2. Створити/видалити/редагувати кафедру факультета.\n"+
@@ -257,7 +253,7 @@ public class University {
                 Sort.stringSortLH(students);
                 for (Student student : students) 
                 {
-                    if(student.getFaculty().equals(fac))
+                    if(student.getFaculty() == fac)
                     {
                          System.out.println(student);
                     }
@@ -266,7 +262,7 @@ public class University {
                 System.out.println("\nProfessors of " + fac.getName()+ ":");
                 for (Professor professor : professors) 
                 {
-                    if(professor.getFaculty().equals(fac))
+                    if(professor.getFaculty() == fac)
                     {
                          System.out.println(professor);
                     }
@@ -292,7 +288,7 @@ public class University {
                 System.out.println("\nProfessors of " + dep.getName()+ ":");
                 for (Professor professor : professors) 
                 {
-                    if(professor.getDepartment().equals(dep))
+                    if(professor.getDepartment() == dep)
                     {
                          System.out.println(professor);
                     }
