@@ -8,7 +8,6 @@ import javax.naming.InvalidNameException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Locale;
 
 public class University {
     private static Faculty[] faculties;
@@ -16,27 +15,25 @@ public class University {
     private static Student[] students;
     private static Professor[] professors;
 
-    final static String path = "";
-
+    final static String path = "";//"C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\";
+    
     private static final File facult = new File(path + "input/faculties");
     private static final File depart = new File(path + "input/departments");
     private static final File stud = new File(path + "input/students");
     private static final File prof = new File(path + "input/professors");
-
-
-    private static final String mainMenuText =
-                    """
-                    1. Створити/видалити/редагувати факультет.
-                    2. Створити/видалити/редагувати кафедру факультета.
-                    3. Додати/видалити/редагувати студента/викладача до кафедри.
-                    4. Знайти студента/викладача за ПІБ, курсом або групою.
-                    5. Вивести всіх студентів впорядкованих за курсами.
-                    6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом.
-                    7. Вивести всіх студентів кафедри впорядкованих за курсами.
-                    8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
-                    9. Вивести всіх студентів кафедри вказаного курсу.
-                    10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
-                    """;
+    
+    private static final String mainMenuText = 
+            "\n1. Створити/видалити/редагувати факультет.\n"+
+            "2. Створити/видалити/редагувати кафедру факультета.\n"+
+            "3. Додати/видалити/редагувати студента/викладача до кафедри.\n"+
+            "4. Знайти студента/викладача за ПІБ, курсом або групою.\n"+
+            "5. Вивести всіх студентів впорядкованих за курсами.\n"+
+            "6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом.\n"+
+            "7. Вивести всіх студентів кафедри впорядкованих за курсами.\n"+
+            "8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.\n"+
+            "9. Вивести всіх студентів кафедри вказаного курсу.\n"+
+            "10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.\n"
+            ;
     private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.\n4. Exit";
     private static final String studentOrProfessor = "1. Student.\n2. Professor.\n3. Exit";
 
@@ -48,9 +45,8 @@ public class University {
             readProfessors();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            printOutArray(students);
         }
+        //printOutArray(departments);
         mainMenu();
     }
 
@@ -59,17 +55,17 @@ public class University {
         int option = DataInput.checkInt(DataInput.getInt("Choose an option: "), 0, 10);
         int choice;
         switch (option) {
-            case 1 -> {
+            case 1:
                 System.out.println("What exactly do you want to do with a faculty?");
                 System.out.println(changeMenu);
                 choice = DataInput.getInt("> ");
                 switch (choice) {
-                    case 1 -> {
+                    case 1:
                         printOutArray(faculties);
                         createFaculty();
                         printOutArray(faculties);
-                    }
-                    case 2 -> {
+                        break;
+                    case 2:
                         try {
                             printOutArray(faculties);
                             Faculty toEdit = findFaculty(DataInput.getString("Enter the name of a faculty you want to change: "));
@@ -78,25 +74,28 @@ public class University {
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    case 3 -> {
+                        break;
+                    case 3:
                         try {
                             Faculty toDelete = findFaculty(DataInput.getString("Enter the name of a faculty you want to delete: "));
                             deleteFaculty(toDelete);
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    default -> System.out.println("Exit");
+                        break;
+                    default:
+                        System.out.println("Exit");
                 }
-            }
-            case 2 -> {
+                break;
+            case 2:
                 System.out.println("What exactly do you want to do with a department?");
                 System.out.println(changeMenu);
                 choice = DataInput.getInt("> ");
                 switch (choice) {
-                    case 1 -> createDepartment();
-                    case 2 -> {
+                    case 1:
+                        createDepartment();
+                        break;
+                    case 2:
                         try {
                             printOutArray(departments);
                             Department toEdit = findDepartment(DataInput.getString("Enter the name of a department you want to change: "));
@@ -107,29 +106,32 @@ public class University {
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    case 3 -> {
+                        break;
+                    case 3:
                         try {
                             Department toDelete = findDepartment(DataInput.getString("Enter the name of a faculty you want to delete: "));
                             deleteDepartment(toDelete);
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    default -> System.out.println("Exit");
+                        break;
+                    default:
+                        System.out.println("Exit");
                 }
-            }
-            case 3 -> {
+                break;
+            case 3:
                 System.out.println("Choose a class you want to change.");
                 System.out.println(studentOrProfessor);
                 choice = DataInput.checkInt(DataInput.getInt("> "), 0, 3);
                 System.out.println(changeMenu);
                 switch (choice) {
-                    case 1 -> {
+                    case 1:
                         choice = DataInput.checkInt(DataInput.getInt("> "), 0, 4);
                         switch (choice) {
-                            case 1 -> createStudent();
-                            case 2 -> {
+                            case 1:
+                                createStudent();
+                                break;
+                            case 2:
                                 try {
                                     printOutArray(students);
                                     Student toEdit = findStudent(DataInput.getString("Enter a name of an existing student: "));
@@ -148,8 +150,8 @@ public class University {
                                 } catch (Exception e) {
                                     System.err.println(e);
                                 }
-                            }
-                            case 3 -> {
+                                break;
+                            case 3:
                                 try {
                                     printOutArray(students);
                                     Student toDelete = findStudent(DataInput.getString("Enter a name of an existing student: "));
@@ -157,15 +159,17 @@ public class University {
                                 } catch (Exception e) {
                                     System.err.println(e);
                                 }
-                            }
-                            default -> System.out.println("Exit");
+                                break;
+                            default:
+                                System.out.println("Exit");
                         }
-                    }
-                    case 2 -> { //professors
+                    case 2: //professors
                         choice = DataInput.checkInt(DataInput.getInt("> "), 0, 4);
                         switch (choice) {
-                            case 1 -> createProfessor();
-                            case 2 -> {
+                            case 1:
+                                createProfessor();
+                                break;
+                            case 2:
                                 try {
                                     printOutArray(professors);
                                     Professor toEdit = findProfessor(DataInput.getString("Enter a name of an existing professor: "));
@@ -184,8 +188,8 @@ public class University {
                                 } catch (Exception e) {
                                     System.err.println(e);
                                 }
-                            }
-                            case 3 -> {
+                                break;
+                            case 3:
                                 try {
                                     printOutArray(professors);
                                     Student toDelete = findStudent(DataInput.getString("Enter a name of an existing student: "));
@@ -193,107 +197,115 @@ public class University {
                                 } catch (Exception e) {
                                     System.err.println(e);
                                 }
-                            }
-                            default -> System.out.println("Exit");
+                                break;
+                            default:
+                                System.out.println("Exit");
                         }
-                    }
                 }
-            }
-            case 4 -> {
+                break;
+            case 4:
                 System.out.println("Choose a class where to find.");
                 System.out.println(studentOrProfessor);
                 choice = DataInput.checkInt(DataInput.getInt("> "), 0, 2);
                 switch (choice) {
-                    case 1 -> {
+                    case 1:
                         try {
                             System.out.println(findStudent(DataInput.getString("Enter a name of an existing student: ")));
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    case 2 -> {
+                        break;
+                    case 2:
                         try {
                             System.out.println(findProfessor(DataInput.getString("Enter a name of an existing professor: ")));
                         } catch (Exception e) {
                             System.err.println(e);
                         }
-                    }
-                    default -> System.out.println("Exit");
+                        break;
+                    default:
+                        System.out.println("Exit");
                 }
-            }
-            case 5 -> {
-                for (int i = 1; i < 5; i++) {
+                break;
+            case 5:
+                for(int i = 1; i < 5; i++)
+                {
                     System.out.println("\nStudents of " + i + " year of studying:");
-                    for (Student student : students) {
-                        if (student.getYofs() == i) {
+                    for (Student student : students) 
+                    {
+                        if(student.getYofs() == i)
+                        {
                             System.out.println(student);
                         }
                     }
                 }
-            }
-            case 6 -> {
+                break;
+            case 6:
                 printOutArray(faculties);
                 Faculty fac = null;
-                while (fac == null) {
+                while(fac == null)
+                {
                     try {
                         fac = findFaculty(DataInput.getString("Enter the name/acronym of a faculty you want to access: "));
-                    } catch (Exception e) {
-                        System.err.println(e);
-                    }
+                    } catch (Exception e) {System.err.println(e);}
                 }
 
                 System.out.println("\nStudents of " + fac.getName() + ":");
                 Sort.stringSortLH(students);
-                for (Student student : students) {
-                    if (student.getFaculty().equals(fac)) {
-                        System.out.println(student);
+                for (Student student : students) 
+                {
+                    if(student.getFaculty() == fac)
+                    {
+                         System.out.println(student);
                     }
                 }
                 Sort.stringSortLH(professors);
-                System.out.println("\nProfessors of " + fac.getName() + ":");
-                for (Professor professor : professors) {
-                    if (professor.getFaculty().equals(fac)) {
-                        System.out.println(professor);
+                System.out.println("\nProfessors of " + fac.getName()+ ":");
+                for (Professor professor : professors) 
+                {
+                    if(professor.getFaculty() == fac)
+                    {
+                         System.out.println(professor);
                     }
                 }
-            }
-            case 7 -> {
+
+                break;
+            case 7:
                 //Вивести всіх студентів кафедри впорядкованих за курсами.
                 ///студент <---> кафедра ???
-                System.out.println("Not ready yet");
-            }
-            case 8 -> {
-                //Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
-                //студент <---> кафедра ???
+                break;
+            case 8:
+            //Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
+            //студент <---> кафедра ???
                 printOutArray(departments);
                 Department dep = null;
-                while (dep == null) {
+                while(dep == null)
+                {
                     try {
                         dep = findDepartment(DataInput.getString("\nEnter the name/acronym of a department you want to access: "));
-                    } catch (Exception e) {
-                        System.err.println(e);
-                    }
+                    } catch (Exception e) {System.err.println(e);}
                 }
                 Sort.stringSortLH(professors);
-                System.out.println("\nProfessors of " + dep.getName() + ":");
-                for (Professor professor : professors) {
-                    if (professor.getDepartment().equals(dep)) {
-                        System.out.println(professor);
+                System.out.println("\nProfessors of " + dep.getName()+ ":");
+                for (Professor professor : professors) 
+                {
+                    if(professor.getDepartment() == dep)
+                    {
+                         System.out.println(professor);
                     }
                 }
-            }
-            case 9 -> {
-                //Вивести всіх студентів кафедри вказаного курсу.
-                //студент <---> кафедра ???
+                break;
+            case 9:
+            //Вивести всіх студентів кафедри вказаного курсу.
+            //студент <---> кафедра ???
                 //System.out.println("Enter a name of a faculty: ");
                 //System.out.println("Enter a year of studying: ");
-            }
-            case 10 -> {
-                //Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
-                //студент <---> кафедра ???
+                break;
+            case 10:
+            //Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
+            //студент <---> кафедра ???
                 //System.out.println("Enter a name of a faculty: ");
                 //System.out.println("Here they are by alphabet ascending: ");
-            }
+                break;
         }
         mainMenu();
     }
@@ -379,30 +391,28 @@ public class University {
 
     private static Faculty findFaculty(String facultyName) throws FacultyDoesNotExist {
         for (Faculty faculty : faculties)
-            if (facultyName.regionMatches(true, 0, faculty.getName(), 0, facultyName.length())
-                    || facultyName.toUpperCase().equals(faculty.getAcronym()))
+            if (facultyName.equals(faculty.getName()) || facultyName.equals(faculty.getAcronym()))
                 return faculty;
         throw new FacultyDoesNotExist("\"" + facultyName + "\" does not exist.");
     }
 
     private static Department findDepartment(String departmentName) throws DepartmentDoesNotExist {
         for (Department department : departments)
-            if (departmentName.regionMatches(true, 0, department.getName(), 0, departmentName.length())
-                    || departmentName.toUpperCase().equals(department.getAcronym()))
+            if (departmentName.equals(department.getName()) || departmentName.equals(department.getAcronym()))
                 return department;
         throw new DepartmentDoesNotExist("\"" + departmentName + "\" does not exist.");
     }
 
     private static Student findStudent(String studentName) throws StudentDoesNotExist {
         for (Student student : students)
-            if (studentName.regionMatches(true, 0, student.getName(), 0, studentName.length()))
+            if (studentName.equals(student.getName()))
                 return student;
         throw new StudentDoesNotExist("\"" + studentName + "\" does not exist.");
     }
 
     private static Professor findProfessor(String professorName) throws ProfessorDoesNotExist {
         for (Professor professor : professors)
-            if (professorName.regionMatches(true, 0, professor.getName(), 0, professorName.length()))
+            if (professorName.equals(professor.getName()))
                 return professor;
         throw new ProfessorDoesNotExist("\"" + professorName + "\" does not exist.");
     }
@@ -489,8 +499,21 @@ public class University {
         }
     }
 
-    private static <T> void printOutArray(T[] array) {
-        for (T element : array)
+    private static void printOutArray(Faculty[] array) {
+        for (Faculty element : array)
             System.out.println(element);
     }
+    private static void printOutArray(Department[] array) {
+        for (Department element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Professor[] array) {
+        for (Professor element : array)
+            System.out.println(element);
+    }
+    private static void printOutArray(Student[] array) {
+        for (Student element : array)
+            System.out.println(element);
+    }
+    
 }
