@@ -32,7 +32,7 @@ public class University {
             7. Вивести всіх студентів кафедри впорядкованих за курсами.
             8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
             9. Вивести всіх студентів кафедри вказаного курсу.
-            10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом."
+            10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
             """;
     private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.\n4. Exit";
     private static final String studentOrProfessor = "1. Student.\n2. Professor.\n3. Exit";
@@ -198,7 +198,7 @@ public class University {
                 }
             }
             case 4 -> {
-                System.out.println("Choose a class where to find.");
+                System.out.println("Choose a class where to find: ");
                 System.out.println(studentOrProfessor);
                 choice = DataInput.checkInt(DataInput.getInt("> "), 0, 2);
                 switch (choice) {
@@ -256,40 +256,188 @@ public class University {
                 }
             }
             case 7 -> {
-                //Вивести всіх студентів кафедри впорядкованих за курсами.
-                ///студент <---> кафедра ???
-            }
-            case 8 -> {
-                //Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
-                //студент <---> кафедра ???
-                printOutArray(departments);
-                Department dep = null;
-                while (dep == null) {
+                int major = 0;
+                while(major == 0)
+                {
                     try {
-                        dep = findDepartment(DataInput.getString("\nEnter the name/acronym of a department you want to access: "));
-                    } catch (Exception e) {
-                        System.err.println(e);
+                        major = DataInput.getInt("\nEnter the number of major you want to access: ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                Student[] studentsSameMajor = new Student[0];
+                for (Student student : students) {
+                    if(student.getMajor() == major)
+                    {
+                        var temp = studentsSameMajor;
+                        studentsSameMajor = new Student[studentsSameMajor.length + 1];
+                        for (int i = 0; i < temp.length; i++)
+                        {
+                            studentsSameMajor[i] = temp[i];
+                        }
+                        studentsSameMajor[studentsSameMajor.length - 1] = student;
                     }
                 }
-                Sort.stringSortLH(professors);
-                System.out.println("\nProfessors of " + dep.getName() + ":");
-                for (Professor professor : professors) {
-                    if (professor.getDepartment() == dep) {
-                        System.out.println(professor);
+                if(studentsSameMajor.length == 0){
+                    System.out.println("No students found");
+                }
+                else{
+                    for(int i = 1; i < 5; i++)
+                    {
+                        System.out.println("\nStudents of " + i + " year of studying and major " + major + ":");
+                        for (Student student : studentsSameMajor) 
+                        {
+                            if(student.getYofs() == i)
+                            {
+                                System.out.println(student);
+                            }
+                        }
+                    }
+                }
+            }
+            case 8 -> {
+                int choice2 = 0;
+                while(choice2 != 1 && choice2 !=2)
+                {
+                    try {
+                        choice2 = DataInput.getInt("\n1.Студентів спеціальності\n2.Викладачів кафедри ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                if(choice2 == 2)
+                {
+                    printOutArray(departments);
+                    Department dep = null;
+                    while(dep == null)
+                    {
+                        try {
+                            dep = findDepartment(DataInput.getString("\nEnter the name/acronym of a department you want to access: "));
+                        } catch (Exception e) {System.err.println(e);}
+                    }
+                    Sort.stringSortLH(professors);
+                    System.out.println("\nProfessors of " + dep.getName()+ ":");
+                    for (Professor professor : professors) 
+                    {
+                        if(professor.getDepartment() == dep)
+                        {
+                             System.out.println(professor);
+                        }
+                    }
+                }
+                else{
+                    int major = 0;
+                    while(major == 0)
+                    {
+                        try {
+                            major = DataInput.getInt("\nEnter the number of major you want to access: ");
+                        } catch (Exception e) {System.err.println(e);}
+                    }
+                    Student[] studentsSameMajor = new Student[0];
+                    for (Student student : students) {
+                        if(student.getMajor() == major)
+                        {
+                            var temp = studentsSameMajor;
+                            studentsSameMajor = new Student[studentsSameMajor.length + 1];
+                            for (int i = 0; i < temp.length; i++)
+                            {
+                                studentsSameMajor[i] = temp[i];
+                            }
+                            studentsSameMajor[studentsSameMajor.length - 1] = student;
+                        }
+                    }
+                    if(studentsSameMajor.length == 0){
+                        System.out.println("No students found");
+                    }
+                    else{
+                        System.out.println("Students of major " + major + ":");
+                        Sort.stringSortLH(studentsSameMajor);
+                        for (Student student : studentsSameMajor) {
+                            System.out.println(student);
+                        }
+                        System.out.println("");
                     }
                 }
             }
             case 9 -> {
-                //Вивести всіх студентів кафедри вказаного курсу.
-                //студент <---> кафедра ???
-                //System.out.println("Enter a name of a faculty: ");
-                //System.out.println("Enter a year of studying: ");
+                int major = 0;
+                while(major == 0)
+                {
+                    try {
+                        major = DataInput.getInt("\nEnter the number of major you want to access: ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                int yos = 0;
+                while(yos < 1 || yos > 6)
+                {
+                    try {
+                        yos = DataInput.getInt("\nEnter the year of study: ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                Student[] studentsSameMajor = new Student[0];
+                for (Student student : students) {
+                    if(student.getMajor() == major)
+                    {
+                        var temp = studentsSameMajor;
+                        studentsSameMajor = new Student[studentsSameMajor.length + 1];
+                        for (int i = 0; i < temp.length; i++)
+                        {
+                            studentsSameMajor[i] = temp[i];
+                        }
+                        studentsSameMajor[studentsSameMajor.length - 1] = student;
+                    }
+                }
+                if(studentsSameMajor.length == 0){
+                    System.out.println("No students found");
+                }
+                else{
+                    
+                    System.out.println("\nStudents of " + yos + " year of studying and major " + major + ":");
+                    for (Student student : studentsSameMajor) 
+                    {
+                        if(student.getYofs() == yos)
+                        {
+                            System.out.println(student);
+                        }
+                    }
+                    
+                    System.out.println("");
+                }
             }
             case 10 -> {
-                //Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
-                //студент <---> кафедра ???
-                //System.out.println("Enter a name of a faculty: ");
-                //System.out.println("Here they are by alphabet ascending: ");
+                int major = 0;
+                while(major == 0)
+                {
+                    try {
+                        major = DataInput.getInt("\nEnter the number of major you want to access: ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                int yos = 0;
+                while(yos < 1 || yos > 6)
+                {
+                    try {
+                        yos = DataInput.getInt("\nEnter the year of study: ");
+                    } catch (Exception e) {System.err.println(e);}
+                }
+                Student[] studentsSameMajor = new Student[0];
+                for (Student student : students) {
+                    if(student.getMajor() == major)
+                    {
+                        var temp = studentsSameMajor;
+                        studentsSameMajor = new Student[studentsSameMajor.length + 1];
+                        for (int i = 0; i < temp.length; i++)
+                        {
+                            studentsSameMajor[i] = temp[i];
+                        }
+                        studentsSameMajor[studentsSameMajor.length - 1] = student;
+                    }
+                }
+                System.out.print(studentsSameMajor.length);
+                Sort.stringSortLH(studentsSameMajor);
+                System.out.println("\nStudents of " + yos + " year of studying and major " + major + ":");
+                for (Student student : studentsSameMajor) 
+                {
+                    if(student.getYofs() == yos)
+                    {
+                        System.out.println(student);
+                    }
+                }
             }
         }
         mainMenu();
