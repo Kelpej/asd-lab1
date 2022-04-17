@@ -4,7 +4,12 @@ public class Person {
     private String name;
     private int age;
     private Faculty faculty;
-
+/**
+ * 
+ * @param name
+ * @param age
+ * @param faculty
+ */
     public Person(PersonName name, int age, Faculty faculty) {
         this.name = name.getName();
         this.age = age;

@@ -1,3 +1,13 @@
+/*
+ * File: University.java
+ * -------------------
+ * 
+ * Section Leader: Olena Pechkurova 
+ *
+ * Authors: Serhii Hryhorenko and Artemii Kolomiichuk
+ * 
+ * This file will eventually implement "Лабораторна робота 1".
+ */
 import Data.DataInput;
 import Data.DepartmentName;
 import Data.Exceptions.*;
@@ -10,18 +20,26 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class University {
+    /**
+     * Arrays that store data 
+     */
     private static Faculty[] faculties;
     private static Department[] departments;
     private static Student[] students;
     private static Professor[] professors;
 
-    final static String path = "";//"C:\\Users\\temak\\Desktop\\LABA 1\\asd-lab1\\";
-    
+    /**
+     * Premade files
+     */
+    final static String path = "";//"C:\\Users\\temak\\Desktop\\asd-lab1-main\\";
     private static final File facult = new File(path + "input/faculties");
     private static final File depart = new File(path + "input/departments");
     private static final File stud = new File(path + "input/students");
     private static final File prof = new File(path + "input/professors");
     
+    /**
+     * Messages for the user
+     */
     private static final String mainMenuText = """
             1. Створити/видалити/редагувати факультет.
             2. Створити/видалити/редагувати кафедру факультета.
@@ -29,14 +47,18 @@ public class University {
             4. Знайти студента/викладача за ПІБ, курсом або групою.
             5. Вивести всіх студентів впорядкованих за курсами.
             6. Вивести всіх студентів/викладачів факультета впорядкованих за алфавітом.
-            7. Вивести всіх студентів кафедри впорядкованих за курсами.
-            8. Вивести всіх студентів/викладачів кафедри впорядкованих за алфавітом.
-            9. Вивести всіх студентів кафедри вказаного курсу.
-            10. Вивести всіх студентів кафедри вказаного курсу впорядкованих за алфавітом.
+            7. Вивести всіх студентів спеціальності впорядкованих за курсами.
+            8. Вивести всіх студентів спеціальності/викладачів кафедри впорядкованих за алфавітом.
+            9. Вивести всіх студентів спеціальності вказаного курсу.
+            10. Вивести всіх студентів спеціальності вказаного курсу впорядкованих за алфавітом.
             """;
     private static final String changeMenu = "1. Create.\n2. Edit.\n3. Delete.\n4. Exit";
     private static final String studentOrProfessor = "1. Student.\n2. Professor.\n3. Exit";
 
+    /**
+     * Runs the program
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             readFaculties();
@@ -51,6 +73,9 @@ public class University {
         mainMenu();
     }
 
+    /**
+     * Main "loop"
+     */
     private static void mainMenu() {
         System.out.println(mainMenuText);
         int option = DataInput.checkInt(DataInput.getInt("Choose an option: "), 0, 10);
@@ -443,6 +468,12 @@ public class University {
         mainMenu();
     }
 
+    /**
+     * 
+     * @throws FileNotFoundException
+     * @throws InvalidFacultyDataFormat
+     * @throws InvalidFacultyNameException
+     */
     private static void readFaculties() throws FileNotFoundException, InvalidFacultyDataFormat, InvalidFacultyNameException {
         String[] input = DataInput.readFile(facult);
         int length = input.length;
@@ -458,7 +489,13 @@ public class University {
             faculties[i] = faculty;
         }
     }
-
+/**
+ * 
+ * @throws FileNotFoundException
+ * @throws InvalidFacultyDataFormat
+ * @throws InvalidDepartmentNameException
+ * @throws FacultyDoesNotExist
+ */
     private static void readDepartments() throws FileNotFoundException, InvalidFacultyDataFormat, InvalidDepartmentNameException, FacultyDoesNotExist {
         String[] input = DataInput.readFile(depart);
         int length = input.length;
@@ -483,7 +520,13 @@ public class University {
             departments[i] = department;
         }
     }
-
+/**
+ * 
+ * @throws FileNotFoundException
+ * @throws InvalidStudentDataFormat
+ * @throws InvalidNameException
+ * @throws FacultyDoesNotExist
+ */
     private static void readStudents() throws FileNotFoundException, InvalidStudentDataFormat, InvalidNameException, FacultyDoesNotExist {
         String[] input = DataInput.readFile(stud);
         int length = input.length;
@@ -502,7 +545,14 @@ public class University {
             students[i] = student;
         }
     }
-
+/**
+ * 
+ * @throws FileNotFoundException
+ * @throws InvalidNameException
+ * @throws FacultyDoesNotExist
+ * @throws InvalidProfessorDataFormat
+ * @throws DepartmentDoesNotExist
+ */
     private static void readProfessors() throws FileNotFoundException, InvalidNameException, FacultyDoesNotExist, InvalidProfessorDataFormat, DepartmentDoesNotExist {
         String[] input = DataInput.readFile(prof);
         int length = input.length;
@@ -521,7 +571,12 @@ public class University {
             professors[i] = professor;
         }
     }
-
+/**
+ * 
+ * @param facultyName
+ * @return
+ * @throws FacultyDoesNotExist
+ */
     private static Faculty findFaculty(String facultyName) throws FacultyDoesNotExist {
         for (Faculty faculty : faculties)
             if (facultyName.equalsIgnoreCase(faculty.getName()) ||
@@ -529,7 +584,12 @@ public class University {
                 return faculty;
         throw new FacultyDoesNotExist("\"" + facultyName + "\" does not exist.");
     }
-
+/**
+ * 
+ * @param departmentName
+ * @return
+ * @throws DepartmentDoesNotExist
+ */
     private static Department findDepartment(String departmentName) throws DepartmentDoesNotExist {
         for (Department department : departments)
             if (departmentName.equalsIgnoreCase(department.getName()) ||
@@ -537,21 +597,33 @@ public class University {
                 return department;
         throw new DepartmentDoesNotExist("\"" + departmentName + "\" does not exist.");
     }
-
+/**
+ * 
+ * @param studentName
+ * @return
+ * @throws StudentDoesNotExist
+ */
     private static Student findStudent(String studentName) throws StudentDoesNotExist {
         for (Student student : students)
             if (studentName.regionMatches(true,0, student.getName(), 0, studentName.length()))
                 return student;
         throw new StudentDoesNotExist("\"" + studentName + "\" does not exist.");
     }
-
+/**
+ * 
+ * @param professorName
+ * @return
+ * @throws ProfessorDoesNotExist
+ */
     private static Professor findProfessor(String professorName) throws ProfessorDoesNotExist {
         for (Professor professor : professors)
             if (professorName.regionMatches(true,0, professor.getName(), 0, professorName.length()))
                 return professor;
         throw new ProfessorDoesNotExist("\"" + professorName + "\" does not exist.");
     }
-
+/**
+ * 
+ */
     private static void createFaculty() {
         try {
             String name = DataInput.getString("Enter the name of the new faculty: ");
@@ -563,7 +635,10 @@ public class University {
             System.err.println(e);
         }
     }
-
+/**
+ * 
+ * @param toDelete
+ */
     private static void deleteFaculty(Faculty toDelete) {
         Faculty[] newFaculties = new Faculty[faculties.length - 1];
         for (int i = 0; i < faculties.length; i++)
@@ -571,7 +646,9 @@ public class University {
                 newFaculties[i] = faculties[i];
         faculties = newFaculties;
     }
-
+/**
+ * 
+ */
     private static void createDepartment() {
         try {
             DepartmentName name = new DepartmentName(DataInput.getString("Enter the name of the new department: "));
@@ -584,7 +661,10 @@ public class University {
             System.err.println(e);
         }
     }
-
+/**
+ * 
+ * @param toDelete
+ */
     private static void deleteDepartment(Department toDelete) {
         Department[] newFaculties = new Department[departments.length - 1];
         for (int i = 0; i < departments.length; i++)
@@ -592,7 +672,9 @@ public class University {
                 newFaculties[i] = departments[i];
         departments = newFaculties;
     }
-
+/**
+ * 
+ */
     private static void createStudent() {
         try {
             PersonName name = new PersonName(DataInput.getString("Enter the name of the new student: "));
@@ -609,7 +691,10 @@ public class University {
             System.err.println(e);
         }
     }
-
+/**
+ * 
+ * @param toDelete
+ */
     private static void deleteStudent(Student toDelete) {
         Student[] newStudents = new Student[students.length - 1];
         for (int i = 0; i < students.length; i++)
@@ -617,7 +702,9 @@ public class University {
                 newStudents[i] = students[i];
         students = newStudents;
     }
-
+/**
+ * 
+ */
     private static void createProfessor() {
         try {
             PersonName name = new PersonName(DataInput.getString("Enter the name of a new professor: "));
@@ -633,7 +720,11 @@ public class University {
             System.err.println(e);
         }
     }
-
+/**
+ * 
+ * @param <T>
+ * @param array
+ */
     private static <T> void printOutArray(T[] array) {
         Arrays.stream(array).forEach(System.out::println);
     }

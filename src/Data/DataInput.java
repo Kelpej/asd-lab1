@@ -6,13 +6,23 @@ import java.util.Scanner;
 
 public final class DataInput {
 
+	/**
+	 * Writes text or premade massage
+	 * @param wr
+	 */
 	private static void writeText(String wr){
 		if (wr == null)
 			System.out.print("Введіть дані: ");
 		else 
 			System.out.print(wr);
 	}
-
+/**
+ * 
+ * @param input
+ * @param low
+ * @param high
+ * @return input if in range [low, high)
+ */
 	public static int checkInt(int input, int low, int high) {
 		while (input <= low || input > high) {
 			input = getInt("Try again: ");
@@ -20,7 +30,12 @@ public final class DataInput {
 
 		return input;
 	}
-
+/**
+ * 
+ * @param file
+ * @return text from file
+ * @throws FileNotFoundException
+ */
 	public static String[] readFile(File file) throws FileNotFoundException {
 		Scanner scanner = new Scanner(file);
 
@@ -41,17 +56,21 @@ public final class DataInput {
 		return res;
 	}
 
-	public static Long getLong() throws IOException{
-		String s = getString("Enter a long value: ");
-		Long value = Long.valueOf(s);
-
-		return value;
-	}
-	
+	/**
+	 * 
+	 * @param text
+	 * @return char
+	 * @throws IOException
+	 */
 	public static char getChar(String text) throws IOException {
 		return getString(text).charAt(0);
 	}
 	
+	/**
+	 * 
+	 * @param text
+	 * @return int value
+	 */
 	public static Integer getInt(String text){
 		writeText(text);
 		String s = "";
@@ -67,6 +86,12 @@ public final class DataInput {
 		return value;
 	}
 	
+	/**
+	 * 
+	 * @param text
+	 * @return text
+	 * @throws IOException
+	 */
 	public static String getString(String text) throws IOException {
 		writeText(text);
 		InputStreamReader isr = new InputStreamReader(System.in);

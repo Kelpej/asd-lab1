@@ -33,6 +33,7 @@ public class DepartmentName {
                 '}';
     }
 
+    
     public String getName() {
         return name;
     }

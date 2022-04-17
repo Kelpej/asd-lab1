@@ -3,7 +3,14 @@ import Data.PersonName;
 public class Student extends Person{
     private int major;
     private int yofs;
-
+/**
+ * 
+ * @param name
+ * @param age
+ * @param faculty
+ * @param major
+ * @param yofs
+ */
     public Student(PersonName name, int age, Faculty faculty, int major, int yofs) {
         super(name, age, faculty);
         this.major = major;

@@ -3,7 +3,10 @@ import Data.FacultyName;
 public class Faculty {
     private String name;
     private String acronym;
-
+/**
+ * 
+ * @param name
+ */
     public Faculty(FacultyName name) {
         this.name = name.getName();
         setAcronym();
