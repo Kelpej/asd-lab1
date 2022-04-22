@@ -21,7 +21,6 @@ public class FacultyName {
             if (data[i] == ' ')
                 data[i + 1] = Character.toLowerCase(data[i + 1]);
         }
-
         this.name = String.valueOf(data);
     }
 

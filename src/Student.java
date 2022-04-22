@@ -1,5 +1,7 @@
 import Data.PersonName;
 
+import java.util.Objects;
+
 public class Student extends Person{
     private int major;
     private int yofs;
@@ -26,6 +28,15 @@ public class Student extends Person{
                 ", major=" + major +
                 ", yofs=" + yofs +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return getName() == student.getName() && getAge() == student.getAge() && getFaculty() == student.getFaculty() &&
+                getMajor() == student.getMajor() && getYofs() == student.getYofs();
     }
 
     public int getMajor() {

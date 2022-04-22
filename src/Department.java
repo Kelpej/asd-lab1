@@ -1,5 +1,7 @@
 import Data.DepartmentName;
 
+import java.util.Objects;
+
 public class Department {
     private String name;
     private String acronym;
@@ -14,6 +16,19 @@ public class Department {
     @Override
     public String toString() {
         return name + '(' + acronym + "), " + faculty;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
+        Department that = (Department) o;
+        return getName().equals(that.getName()) && getAcronym().equals(that.getAcronym()) && getFaculty().equals(that.getFaculty());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAcronym(), getFaculty());
     }
 
     public String getName() {

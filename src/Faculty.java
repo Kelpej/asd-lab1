@@ -1,5 +1,7 @@
 import Data.FacultyName;
 
+import java.util.Objects;
+
 public class Faculty {
     private String name;
     private String acronym;
@@ -15,6 +17,14 @@ public class Faculty {
     @Override
     public String toString() {
         return name + '(' + acronym + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Faculty)) return false;
+        Faculty faculty = (Faculty) o;
+        return getName().equals(faculty.getName()) && getAcronym().equals(faculty.getAcronym());
     }
 
     public String getName() {

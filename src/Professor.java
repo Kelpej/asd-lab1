@@ -1,5 +1,7 @@
 import Data.PersonName;
 
+import java.util.Objects;
+
 public class Professor extends Person{
     private Department department;
 /**
@@ -22,6 +24,20 @@ public class Professor extends Person{
                 ", faculty= " + getFaculty() +
                 ", department=" + department +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Professor)) return false;
+        Professor professor = (Professor) o;
+        return getName() == professor.getName() && getAge() == professor.getAge() &&
+                getDepartment().equals(professor.getDepartment()) && getFaculty().equals(professor.getFaculty());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDepartment());
     }
 
     public Department getDepartment() {
