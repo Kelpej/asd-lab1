@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Professor extends Person{
     private Department department;
 /**
- * 
+ * Викладач
  * @param name
  * @param age
  * @param faculty

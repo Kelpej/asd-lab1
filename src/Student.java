@@ -6,7 +6,7 @@ public class Student extends Person{
     private int major;
     private int yofs;
 /**
- * 
+ * Студент
  * @param name
  * @param age
  * @param faculty

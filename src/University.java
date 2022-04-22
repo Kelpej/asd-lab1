@@ -312,7 +312,7 @@ public class University {
                 Student[] studentsSameMajor = new Student[0];
                 for (Student student : students) {
                     if (student.getMajor() == major) {
-                        var temp = studentsSameMajor;
+                        Student[] temp = studentsSameMajor;
                         studentsSameMajor = new Student[studentsSameMajor.length + 1];
                         for (int i = 0; i < temp.length; i++) {
                             studentsSameMajor[i] = temp[i];
@@ -371,7 +371,7 @@ public class University {
                     Student[] studentsSameMajor = new Student[0];
                     for (Student student : students) {
                         if (student.getMajor() == major) {
-                            var temp = studentsSameMajor;
+                            Student[] temp = studentsSameMajor;
                             studentsSameMajor = new Student[studentsSameMajor.length + 1];
                             for (int i = 0; i < temp.length; i++) {
                                 studentsSameMajor[i] = temp[i];
@@ -411,7 +411,7 @@ public class University {
                 Student[] studentsSameMajor = new Student[0];
                 for (Student student : students) {
                     if (student.getMajor() == major) {
-                        var temp = studentsSameMajor;
+                	Student[] temp = studentsSameMajor;
                         studentsSameMajor = new Student[studentsSameMajor.length + 1];
                         for (int i = 0; i < temp.length; i++) {
                             studentsSameMajor[i] = temp[i];
@@ -453,7 +453,7 @@ public class University {
                 Student[] studentsSameMajor = new Student[0];
                 for (Student student : students) {
                     if (student.getMajor() == major) {
-                        var temp = studentsSameMajor;
+                	Student[] temp = studentsSameMajor;
                         studentsSameMajor = new Student[studentsSameMajor.length + 1];
                         for (int i = 0; i < temp.length; i++) {
                             studentsSameMajor[i] = temp[i];
@@ -475,6 +475,7 @@ public class University {
     }
 
     /**
+     * зчитує дані про факультети з початкового файлу 
      * @throws FileNotFoundException
      * @throws InvalidFacultyDataFormat
      * @throws InvalidFacultyNameException
@@ -496,6 +497,7 @@ public class University {
     }
 
     /**
+     * зчитує дані про кафедри з початкового файлу 
      * @throws FileNotFoundException
      * @throws InvalidFacultyDataFormat
      * @throws InvalidDepartmentNameException
@@ -527,6 +529,7 @@ public class University {
     }
 
     /**
+     * зчитує дані про студентів з початкового файлу 
      * @throws FileNotFoundException
      * @throws InvalidStudentDataFormat
      * @throws InvalidNameException
@@ -552,6 +555,7 @@ public class University {
     }
 
     /**
+     *  зчитує дані про викладачів з початкового файлу 
      * @throws FileNotFoundException
      * @throws InvalidNameException
      * @throws FacultyDoesNotExist
@@ -578,6 +582,7 @@ public class University {
     }
 
     /**
+     * повертає факультет на основі введеної стрічки 
      * @param facultyName
      * @return
      * @throws FacultyDoesNotExist
@@ -591,6 +596,7 @@ public class University {
     }
 
     /**
+     * повертає кафедру на основі введеної стрічки 
      * @param departmentName
      * @return
      * @throws DepartmentDoesNotExist
@@ -604,6 +610,7 @@ public class University {
     }
 
     /**
+     * повертає студента на основі введеної стрічки
      * @param studentName
      * @return
      * @throws StudentDoesNotExist
@@ -616,6 +623,7 @@ public class University {
     }
 
     /**
+     * повертає викладача на основі введеної стрічки 
      * @param professorName
      * @return
      * @throws ProfessorDoesNotExist
@@ -628,7 +636,7 @@ public class University {
     }
 
     /**
-     *
+     *створює новий факультет 
      */
     private static void createFaculty() {
         try {
@@ -643,6 +651,7 @@ public class University {
     }
 
     /**
+     *  видаляє існуючий факультет 
      * @param toDelete
      */
     private static void deleteFaculty(Faculty toDelete) {
@@ -654,7 +663,7 @@ public class University {
     }
 
     /**
-     *
+     *створює нову кафедру
      */
     private static void createDepartment() {
         try {
@@ -670,6 +679,7 @@ public class University {
     }
 
     /**
+     *  видаляє існуючу кафедру
      * @param toDelete
      */
     private static void deleteDepartment(Department toDelete) {
@@ -681,7 +691,7 @@ public class University {
     }
 
     /**
-     *
+     *створює нового студента
      */
     private static void createStudent() {
         try {
@@ -706,6 +716,7 @@ public class University {
     }
 
     /**
+     * видаляє існуючого студента 
      * @param toDelete
      */
     private static void deleteStudent(Student toDelete) {
@@ -717,7 +728,7 @@ public class University {
     }
 
     /**
-     *
+     *створює нового викладача
      */
     private static void createProfessor() {
         try {
@@ -741,6 +752,7 @@ public class University {
     }
 
     /**
+     * виводить зміст масиву
      * @param <T>
      * @param array
      */

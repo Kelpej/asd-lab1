@@ -4,7 +4,11 @@ import Data.Exceptions.InvalidDepartmentNameException;
 
 public class DepartmentName {
     String name;
-
+/**
+ * Назва кафедри
+ * @param name
+ * @throws InvalidDepartmentNameException
+ */
     public DepartmentName(String name) throws InvalidDepartmentNameException {
         if (name.split(" ")[0].equals("Кафедра")) {
             this.name = name;
@@ -14,7 +18,10 @@ public class DepartmentName {
                     name + " is not valid.");
         }
     }
-
+/**
+ * корегує назву кафедри з урахуванням входження під час написання слова «кафедра» 
+ * @param name
+ */
     private void fixString(String name) {
         char[] data = name.toCharArray();
 

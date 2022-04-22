@@ -17,7 +17,7 @@ public final class DataInput {
 			System.out.print(wr);
 	}
 /**
- * 
+ * отримує число в визначених межах 
  * @param input
  * @param low
  * @param high
@@ -31,7 +31,7 @@ public final class DataInput {
 		return input;
 	}
 /**
- * 
+ *  зчитує початкові файли 
  * @param file
  * @return text from file
  * @throws FileNotFoundException
@@ -57,7 +57,7 @@ public final class DataInput {
 	}
 
 	/**
-	 * 
+	 * отримує символ від користувача 
 	 * @param text
 	 * @return char
 	 * @throws IOException
@@ -67,7 +67,7 @@ public final class DataInput {
 	}
 	
 	/**
-	 * 
+	 * отримує число від користувача 
 	 * @param text
 	 * @return int value
 	 */
@@ -87,7 +87,7 @@ public final class DataInput {
 	}
 	
 	/**
-	 * 
+	 * отримує стрічку від користувача 
 	 * @param text
 	 * @return text
 	 * @throws IOException

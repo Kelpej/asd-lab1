@@ -6,7 +6,11 @@ public class Department {
     private String name;
     private String acronym;
     private Faculty faculty;
-
+/**
+ * Кафедра
+ * @param name
+ * @param faculty
+ */
     public Department(DepartmentName name, Faculty faculty) {
         this.name = name.getName();
         setAcronym();

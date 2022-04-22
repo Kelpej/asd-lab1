@@ -5,7 +5,7 @@ public class Person {
     private int age;
     private Faculty faculty;
 /**
- * 
+ * Людина пов'язана з університетом
  * @param name
  * @param age
  * @param faculty

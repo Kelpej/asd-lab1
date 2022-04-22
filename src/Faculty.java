@@ -6,7 +6,7 @@ public class Faculty {
     private String name;
     private String acronym;
 /**
- * 
+ * Факультет
  * @param name
  */
     public Faculty(FacultyName name) {

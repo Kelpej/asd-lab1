@@ -1,5 +1,6 @@
 public class Sort {
     /**
+     * сортує масив за алфавітом
      * @param strs
      */
     public static void stringSortLH(String[] strs) {
@@ -14,7 +15,10 @@ public class Sort {
             }
         }
     }
-
+/**
+ * сортує масив за алфавітом
+ * @param professors
+ */
     public static void stringSortLH(Professor[] professors) {
         Professor temp;
         for (int j = 0; j < professors.length; j++) {
@@ -27,7 +31,10 @@ public class Sort {
             }
         }
     }
-
+/**
+ * сортує масив за алфавітом
+ * @param students
+ */
     public static void stringSortLH(Student[] students) {
         Student temp;
         for (int j = 0; j < students.length; j++) {

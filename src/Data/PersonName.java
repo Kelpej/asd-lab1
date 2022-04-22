@@ -4,7 +4,11 @@ import javax.naming.InvalidNameException;
 
 public class PersonName {
     private String name;
-
+/**
+ * Ім'я людини
+ * @param name
+ * @throws InvalidNameException
+ */
     public PersonName(String name) throws InvalidNameException {
         if (name.split(" ").length == 3)
             this.name = name;
